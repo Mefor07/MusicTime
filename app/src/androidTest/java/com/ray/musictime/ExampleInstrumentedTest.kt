@@ -1,4 +1,4 @@
-package com.adastra_one.musictime
+package com.ray.musictime
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

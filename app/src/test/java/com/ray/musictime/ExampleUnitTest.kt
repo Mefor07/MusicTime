@@ -1,4 +1,4 @@
-package com.adastra_one.musictime
+package com.ray.musictime
 
 import org.junit.Test
 

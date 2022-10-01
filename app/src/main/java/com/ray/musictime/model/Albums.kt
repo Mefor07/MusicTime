@@ -1,6 +1,6 @@
-package com.adastra_one.musictime.model
+package com.ray.musictime.model
 
-data class Ablums(
+data class Albums(
     val feed: Feed
 )
 
