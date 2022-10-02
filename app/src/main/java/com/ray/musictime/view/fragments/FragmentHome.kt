@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ray.musictime.adapters.AlbumAdapter
 import com.ray.musictime.databinding.FragmentHomeBinding
+import com.ray.musictime.model.Albums
+import com.ray.musictime.model.Result
 import com.ray.musictime.viewmodel.AlbumViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
@@ -31,6 +36,8 @@ class FragmentHome : Fragment() {
     private var param2: String? = null
 
     lateinit var albumViewModel: AlbumViewModel
+    private val albumList = ArrayList<Result>()
+    private lateinit var albumAdapter: AlbumAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +53,24 @@ class FragmentHome : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentHomeBinding.inflate(layoutInflater)
+
         //Picasso.get().load("https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/3e/04/eb/3e04ebf6-370f-f59d-ec84-2c2643db92f1/196626945068.jpg/100x100bb.jpg").transform(RoundCornersTransform(20.0f)).into(binding.img)
 
 
         albumViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
         albumViewModel.getItunesAlbum()!!.observe(requireActivity(), Observer {
             Log.d("MTIME", it.toString())
+
+            for(item in it.feed.results)
+              albumList.add(item)
+
+            Log.d("SIZE", ""+albumList.size)
+            val albumLayoutManager = GridLayoutManager(context, 2)
+            val albumListRecyclerView: RecyclerView = binding.albumList
+            albumListRecyclerView.layoutManager = albumLayoutManager
+            albumAdapter = AlbumAdapter(this@FragmentHome, albumList);
+            albumListRecyclerView.adapter = albumAdapter
+            albumAdapter.notifyDataSetChanged()
         })
         return binding.root
     }

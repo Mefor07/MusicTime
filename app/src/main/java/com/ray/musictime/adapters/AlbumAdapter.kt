@@ -7,12 +7,13 @@ import com.ray.musictime.R
 import com.ray.musictime.databinding.AlbumItemBinding
 import com.ray.musictime.interfaces.AlbumClickListener
 import com.ray.musictime.model.Albums
+import com.ray.musictime.model.Result
 import com.ray.musictime.view.fragments.FragmentHome
 import com.squareup.picasso.Picasso
 
-class CategoryAdapter(var itemList:List<Albums>,  onClickListener: AlbumClickListener): RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+class AlbumAdapter(var fragmentHome: FragmentHome, var itemList:List<Result>): RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
 
-    var onClickListener = onClickListener
+
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = AlbumItemBinding.bind(view)
@@ -27,19 +28,19 @@ class CategoryAdapter(var itemList:List<Albums>,  onClickListener: AlbumClickLis
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = itemList[position].feed
+        val item = itemList[position]
         //holder.albumArt.setImageResource(item)
-        Picasso.get().load(item.results[position].artworkUrl100).transform(
+        Picasso.get().load(item.artworkUrl100).transform(
             FragmentHome.RoundCornersTransform(
                 20.0f
             )
         ).into(holder.albumArt)
-        holder.albumName.text = item.results[position].name
-        holder.artistName.text = item.results[position].artistName
+        holder.albumName.text = item.name
+        holder.artistName.text = item.artistName
 
 
         holder.albumArt.setOnClickListener {
-            onClickListener.categoryClick(itemList[position])
+            //onClickListener.categoryClick(itemList[position])
         }
 
 
