@@ -1,7 +1,6 @@
-package app.medrx.MedrxApp.retrofit
+package com.ray.musictime.retrofit
 
 import androidx.viewbinding.BuildConfig
-import com.ray.musictime.repository.ApiInterface
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

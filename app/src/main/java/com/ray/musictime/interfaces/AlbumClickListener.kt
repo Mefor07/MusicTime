@@ -1,8 +1,6 @@
-package app.medrx.MedrxApp.view.interfaces
+package com.ray.musictime.interfaces
+import com.ray.musictime.model.Albums
 
-
-import app.medrx.MedrxApp.model.Category
-
-interface CategoryClickListener {
-    fun categoryClick(category: Category)
+interface AlbumClickListener {
+    fun categoryClick(albums: Albums)
 }

@@ -2,32 +2,32 @@ package app.medrx.MedrxApp.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import app.medrx.MedrxApp.model.Order
-import app.medrx.MedrxApp.model.ProductCategory
-import app.medrx.MedrxApp.retrofit.RetrofitClient
+import com.ray.musictime.model.Albums
+import com.ray.musictime.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 
-object CategoryRepository {
-    val category = MutableLiveData<ProductCategory>()
+object AlbumRepository {
+    val albums = MutableLiveData<Albums>()
 
-    fun getProductByCategory(token:String, categoryId:String): MutableLiveData<ProductCategory> {
-        val call = RetrofitClient.apiInterface.getProductByCategory(categoryId, token)
-        call.enqueue(object: Callback<ProductCategory> {
+    fun getItunesAlbums(): MutableLiveData<Albums> {
+        val call = RetrofitClient.apiInterface.getAlbums()
+        call.enqueue(object: Callback<Albums> {
 
-            override fun onResponse(call: Call<ProductCategory>, response: Response<ProductCategory>) {
+            override fun onResponse(call: Call<Albums>, response: Response<Albums>) {
                 val data = response.body()
-                val success = data!!.success
-                val product = data!!.products
-                CategoryRepository.category.value = ProductCategory(success, product)
+                //val success = data!!.success
+                //val product = data!!.products
+                val feed = data?.feed
+                albums.value = feed?.let { Albums(it) }
             }
-            override fun onFailure(call: Call<ProductCategory>, t: Throwable) {
+            override fun onFailure(call: Call<Albums>, t: Throwable) {
                 Log.v("DEBUG : ", t.message.toString())
             }
         })
 
-        return category
+        return albums
 
     }
 }

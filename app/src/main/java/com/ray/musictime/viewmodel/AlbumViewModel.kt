@@ -9,7 +9,7 @@ import com.ray.musictime.model.Albums
 class AlbumViewModel(): ViewModel() {
     var albumsLiveData: MutableLiveData<Albums>? = null
 
-    fun getProductCategory(token:String, categoryId: String): LiveData<Albums>? {
+    fun getItunesAlbum(): LiveData<Albums>? {
         albumsLiveData = AlbumRepository.getItunesAlbums()
         return albumsLiveData
     }

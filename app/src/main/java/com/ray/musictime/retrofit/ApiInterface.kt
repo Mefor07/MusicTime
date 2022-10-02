@@ -1,4 +1,4 @@
-package com.ray.musictime.repository
+package com.ray.musictime.retrofit
 
 import com.ray.musictime.model.Albums
 import okhttp3.MultipartBody

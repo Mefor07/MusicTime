@@ -1,11 +1,19 @@
 package com.ray.musictime.view.fragments
 
+import android.graphics.*
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.adastra_one.musictime.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.ray.musictime.databinding.FragmentHomeBinding
+import com.ray.musictime.viewmodel.AlbumViewModel
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Transformation
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +30,8 @@ class FragmentHome : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var albumViewModel: AlbumViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +45,15 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val binding = FragmentHomeBinding.inflate(layoutInflater)
+        //Picasso.get().load("https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/3e/04/eb/3e04ebf6-370f-f59d-ec84-2c2643db92f1/196626945068.jpg/100x100bb.jpg").transform(RoundCornersTransform(20.0f)).into(binding.img)
+
+
+        albumViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
+        albumViewModel.getItunesAlbum()!!.observe(requireActivity(), Observer {
+            Log.d("MTIME", it.toString())
+        })
+        return binding.root
     }
 
     companion object {
@@ -56,5 +74,28 @@ class FragmentHome : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+
+    class RoundCornersTransform(private val radiusInPx: Float) : Transformation {
+
+        override fun transform(source: Bitmap): Bitmap {
+            val bitmap = Bitmap.createBitmap(source.width, source.height, source.config)
+            val canvas = Canvas(bitmap)
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+            val shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            paint.shader = shader
+            val rect = RectF(0.0f, 0.0f, source.width.toFloat(), source.height.toFloat())
+            canvas.drawRoundRect(rect, radiusInPx, radiusInPx, paint)
+            source.recycle()
+
+            return bitmap
+        }
+
+        override fun key(): String {
+            return "round_corners"
+        }
+
     }
 }
