@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setCurrentFragment(fragment: Fragment) =
+    public fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.frag_container,fragment)
             commit()

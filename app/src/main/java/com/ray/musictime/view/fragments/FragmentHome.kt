@@ -6,15 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ray.musictime.R
 import com.ray.musictime.adapters.AlbumAdapter
 import com.ray.musictime.databinding.FragmentHomeBinding
+import com.ray.musictime.interfaces.AlbumClickListener
 import com.ray.musictime.model.Albums
 import com.ray.musictime.model.Result
+import com.ray.musictime.view.MainActivity
 import com.ray.musictime.viewmodel.AlbumViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
@@ -30,10 +35,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FragmentHome.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentHome : Fragment() {
+class FragmentHome() : Fragment(), AlbumClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var cont = context
 
     lateinit var albumViewModel: AlbumViewModel
     private val albumList = ArrayList<Result>()
@@ -117,4 +123,27 @@ class FragmentHome : Fragment() {
         }
 
     }
+
+    override fun albumClick(albums: Result) {
+        val detailFragment = FragmentDetail()
+        val bundle = Bundle()
+        bundle.putString("IMAGE", albums.artworkUrl100)
+        bundle.putString("ARTIST", albums.artistName)
+        bundle.putString("ALBUM_NAME", albums.name)
+        detailFragment.arguments = bundle
+        this.setCurrentFragment(detailFragment)
+
+        //Toast.makeText(context, "Hey", Toast.LENGTH_LONG).show()
+    }
+
+
+    private fun setCurrentFragment(fragment: Fragment) =
+        activity?.supportFragmentManager?.beginTransaction().apply {
+            this!!.replace(R.id.frag_container,fragment)
+            commit()
+        }
+
+
+
+
 }

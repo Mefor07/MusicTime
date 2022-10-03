@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/album_curved_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/fade.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/genre_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/visit_button.xml" value="0.1" />
         <entry key="app/src/main/res/font/sf_pro_display.xml" value="0.1287037037037037" />
         <entry key="app/src/main/res/font/sf_pro_display_bold.xml" value="0.10925925925925926" />
         <entry key="app/src/main/res/font/sf_pro_text.xml" value="0.10925925925925926" />
@@ -12,6 +14,7 @@
         <entry key="app/src/main/res/font/sf_pro_text_semibold.xml" value="0.1287037037037037" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/album_item.xml" value="0.115625" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.115625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
       </map>
     </option>

@@ -11,7 +11,7 @@ import com.ray.musictime.model.Result
 import com.ray.musictime.view.fragments.FragmentHome
 import com.squareup.picasso.Picasso
 
-class AlbumAdapter(var fragmentHome: FragmentHome, var itemList:List<Result>): RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
+class AlbumAdapter(var context: FragmentHome, var itemList:List<Result>): RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
 
 
 
@@ -20,6 +20,7 @@ class AlbumAdapter(var fragmentHome: FragmentHome, var itemList:List<Result>): R
         var albumArt = binding.img
         var albumName = binding.albumName
         var artistName = binding.artistName
+        var rView = binding.rel1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -39,8 +40,9 @@ class AlbumAdapter(var fragmentHome: FragmentHome, var itemList:List<Result>): R
         holder.artistName.text = item.artistName
 
 
-        holder.albumArt.setOnClickListener {
+        holder.rView.setOnClickListener {
             //onClickListener.categoryClick(itemList[position])
+            context.albumClick(item)
         }
 
 
