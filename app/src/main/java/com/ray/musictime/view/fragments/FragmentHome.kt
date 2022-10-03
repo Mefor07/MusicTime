@@ -125,11 +125,19 @@ class FragmentHome() : Fragment(), AlbumClickListener {
     }
 
     override fun albumClick(albums: Result) {
+
+        var arrGenre: ArrayList<String> = ArrayList();
+
+        //extract each genre into a simple string array
+        for(genreItem in albums.genres){
+            arrGenre.add(genreItem.name)
+        }
         val detailFragment = FragmentDetail()
         val bundle = Bundle()
         bundle.putString("IMAGE", albums.artworkUrl100)
         bundle.putString("ARTIST", albums.artistName)
         bundle.putString("ALBUM", albums.name)
+        bundle.putStringArrayList("GENRE", arrGenre)
         detailFragment.arguments = bundle
         this.setCurrentFragment(detailFragment)
 

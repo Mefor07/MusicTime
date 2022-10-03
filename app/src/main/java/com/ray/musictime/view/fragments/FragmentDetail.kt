@@ -17,6 +17,7 @@ import com.ray.musictime.databinding.FragmentDetailBinding
 import com.ray.musictime.databinding.FragmentHomeBinding
 import com.ray.musictime.interfaces.AlbumClickListener
 import com.ray.musictime.model.Albums
+import com.ray.musictime.model.Genre
 import com.ray.musictime.model.Result
 import com.ray.musictime.view.MainActivity
 import com.ray.musictime.viewmodel.AlbumViewModel
@@ -38,6 +39,9 @@ class FragmentDetail() : Fragment(){
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val genreList = ArrayList<Genre>()
+    private lateinit var genreAdapter: AlbumAdapter
 
 
 

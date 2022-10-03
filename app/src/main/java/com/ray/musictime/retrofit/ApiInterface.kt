@@ -11,7 +11,7 @@ interface ApiInterface {
     @Headers(
         "Accept: application/json",
     )
-    @GET("v2/us/music/most-played/10/albums.json")
+    @GET("v2/us/music/most-played/100/albums.json")
     fun getAlbums(
         //@Header("Authorization") token: String?,
         //@Path("id") id: String
