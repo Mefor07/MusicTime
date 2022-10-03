@@ -27,26 +27,26 @@
                 android:paddingHorizontal="21dp">
 
                 <TextView
+                    android:id="@+id/artist_name"
                     style="@style/Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Bad Bunny"/>
 
                 <TextView
+                    android:id="@+id/album_name"
                     style="@style/TextStyle3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Un Verano Sin Ti"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_pro_text_medium"
-                    android:textStyle="normal"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    android:background="@drawable/genre_button"
-                    android:textColor="@color/bright_blue"
-                    android:text="Reggaeton"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/genre_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
 
 

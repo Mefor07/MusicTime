@@ -129,7 +129,7 @@ class FragmentHome() : Fragment(), AlbumClickListener {
         val bundle = Bundle()
         bundle.putString("IMAGE", albums.artworkUrl100)
         bundle.putString("ARTIST", albums.artistName)
-        bundle.putString("ALBUM_NAME", albums.name)
+        bundle.putString("ALBUM", albums.name)
         detailFragment.arguments = bundle
         this.setCurrentFragment(detailFragment)
 

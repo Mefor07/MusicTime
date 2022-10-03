@@ -57,7 +57,8 @@ class FragmentDetail() : Fragment(){
         val binding = FragmentDetailBinding.inflate(layoutInflater)
 
         Picasso.get().load(arguments?.getString("IMAGE")).into(binding.albumImage)
-        Toast.makeText(context, ""+param1, Toast.LENGTH_LONG).show()
+        binding.artistName.text =arguments?.getString("ARTIST")
+        binding.albumName.text =arguments?.getString("ALBUM")
 
         return binding.root
     }
