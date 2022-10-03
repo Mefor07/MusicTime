@@ -1,28 +1,16 @@
 package com.ray.musictime.view.fragments
 
-import android.graphics.*
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ray.musictime.adapters.AlbumAdapter
+import com.ray.musictime.adapters.GenreAdapter
 import com.ray.musictime.databinding.FragmentDetailBinding
-import com.ray.musictime.databinding.FragmentHomeBinding
-import com.ray.musictime.interfaces.AlbumClickListener
-import com.ray.musictime.model.Albums
 import com.ray.musictime.model.Genre
-import com.ray.musictime.model.Result
-import com.ray.musictime.view.MainActivity
-import com.ray.musictime.viewmodel.AlbumViewModel
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Transformation
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,7 +29,8 @@ class FragmentDetail() : Fragment(){
     private var param2: String? = null
 
     private val genreList = ArrayList<Genre>()
-    private lateinit var genreAdapter: AlbumAdapter
+    private lateinit var genreAdapter: GenreAdapter
+
 
 
 
@@ -63,6 +52,13 @@ class FragmentDetail() : Fragment(){
         Picasso.get().load(arguments?.getString("IMAGE")).into(binding.albumImage)
         binding.artistName.text =arguments?.getString("ARTIST")
         binding.albumName.text =arguments?.getString("ALBUM")
+
+        val genreLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val geListRecyclerView: RecyclerView = binding.genreRecyclerview
+        geListRecyclerView.layoutManager = genreLayoutManager
+        genreAdapter = GenreAdapter(this@FragmentDetail, arguments?.getStringArrayList("GENRE"));
+        geListRecyclerView.adapter = genreAdapter
+        genreAdapter.notifyDataSetChanged()
 
         return binding.root
     }

@@ -10,10 +10,12 @@ import com.ray.musictime.interfaces.AlbumClickListener
 import com.ray.musictime.model.Albums
 import com.ray.musictime.model.Genre
 import com.ray.musictime.model.Result
+import com.ray.musictime.view.fragments.FragmentDetail
 import com.ray.musictime.view.fragments.FragmentHome
 import com.squareup.picasso.Picasso
+import java.util.ArrayList
 
-class GenreAdapter(var context: FragmentHome, var itemList:List<Genre>): RecyclerView.Adapter<GenreAdapter.MyViewHolder>() {
+class GenreAdapter(var context: FragmentDetail, var itemList: ArrayList<String>?): RecyclerView.Adapter<GenreAdapter.MyViewHolder>() {
 
 
 
@@ -28,16 +30,16 @@ class GenreAdapter(var context: FragmentHome, var itemList:List<Genre>): Recycle
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = itemList[position]
+        val item = itemList?.get(position)
         //holder.albumArt.setImageResource(item)
 
-        holder.genreName.text = item.name
+        holder.genreName.text = item
 
 
 
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return itemList!!.size
     }
 }
